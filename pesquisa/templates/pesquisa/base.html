@@ -2,6 +2,11 @@
 <html>
     <head>
         <title>AR app</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+        <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
+        <!-- add this script in order to load a large set of 3D model extensions-->
+        <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -9,6 +14,7 @@
         .page-header {
             background-color: #C25100;
             margin-top: 0;
+            height: 70px;
             padding: 20px 20px 20px 40px;
         }
 
@@ -17,7 +23,11 @@
             font-size: 36pt;
             text-decoration: none;
         }
-
+        .page-header a, .page-header a:visited, .page-header a:active {
+            color: #ffffff;
+            font-size: 15pt;
+            text-decoration: none;
+        }
         .content {
             margin-left: 40px;
         }
@@ -59,15 +69,12 @@
     </head>
     <body>
         <div class="page-header">
-            <a href="{% url 'home' %}" class="top-menu"><span class="glyphicon glyphicon-home" style="padding: 5px;"></span>Home</a>
-            <a href="{% url 'leitura' %}" class="top-menu"><span class="glyphicon glyphicon-qrcode" style="padding: 5px;"></span>Iniciar</a>
-            <a href="{% url 'administrador' %}" class="top-menu"><span class="glyphicon glyphicon-user" style="padding: 5px;"></span>Admin</a>
-            <h1>
-                Aplicação de AR para uso em aulas práticas de medicina
-            </h1>
-            <p>
-                O objetivo desse aplicativo é permitir que alunos utilizem realidade aumentada (AR) na sala de aula de uma forma ativa. Nesse caso, os próprios alunos podem produzir e organizar os conteúdos visualizados pelo aplicativo.
-            </p>
+            <div>
+                <a href="{% url 'home' %}" class="top-menu"><span class="glyphicon glyphicon-home" style="padding: 5px;"></span>Home</a>
+                <a href="{% url 'leitura' %}" class="top-menu"><span class="glyphicon glyphicon-qrcode" style="padding: 5px;"></span>Iniciar</a>
+                <a href="{% url 'administrador' %}" class="top-menu"><span class="glyphicon glyphicon-user" style="padding: 5px;"></span>Admin</a>
+     
+            </div>
         </div>
         <div class="content container">
             <div class="row">
