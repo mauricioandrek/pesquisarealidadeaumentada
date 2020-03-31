@@ -1,11 +1,6 @@
 {% load static %}
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-        <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
-        <!-- add this script in order to load a large set of 3D model extensions-->
-        <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <head>   
         <title>AR app</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -84,39 +79,37 @@
             }
         </script>
     </head>
-    <body style='margin : 0px; overflow: hidden;'>
+    <body>
         <div class="content container">
-            <div class="row">
-                <div id="menu_mostrar" class="page-header" style="display:none">
-                    <a onclick="ocultarMenu()"><span class="glyphicon glyphicon-chevron-up" style="padding: 5px;"></span>Ocultar</a>
-                    <a href="{% url 'home' %}" class="top-menu"><span class="glyphicon glyphicon-home" style="padding: 5px;"></span>Home</a>
-                    <div id="info_tarefa">     
-                        <a onclick="verOpcoes()"><span class="glyphicon glyphicon-tasks" style="padding: 10px;"></span>Opções</a>           
-                        <h1>
-                            Passo 1
-                        </h1>
-                        <p>
-                            Enunciado geral do passo 1
-                        </p>
-                    </div>
-                    <div id="opcoes_tarefa" style="display:none">    
-                        <a onclick="verInfo()"><span class="glyphicon glyphicon-info-sign" style="padding: 10px;"></span>Descrição da tarefa</a>                       
-                        <form action="/action_page.php">
-                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                            <label for="vehicle1"> I have a bike</label><br>
-                            <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                            <label for="vehicle2"> I have a car</label><br>
-                            <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                            <label for="vehicle3"> I have a boat</label><br><br>
-                            <input type="submit" value="Enviar">
-                        </form>
-                    </div>
+            <div id="menu_mostrar" class="page-header" style="display:none">
+                <a onclick="ocultarMenu()"><span class="glyphicon glyphicon-chevron-up" style="padding: 5px;"></span>Ocultar</a>
+                <a href="{% url 'home' %}" class="top-menu"><span class="glyphicon glyphicon-home" style="padding: 5px;"></span>Home</a>
+                <div id="info_tarefa">     
+                    <a onclick="verOpcoes()"><span class="glyphicon glyphicon-tasks" style="padding: 10px;"></span>Opções</a>           
+                    <h1>
+                        Passo 1
+                    </h1>
+                    <p>
+                        Enunciado geral do passo 1
+                    </p>
                 </div>
-                <div id="menu_ocultar"  class="page-header">
-                    <a onclick="mostrarMenu()"><span class="glyphicon glyphicon-chevron-down" style="padding: 5px;"></span>Mostrar</a>
-                    <a href="{% url 'home' %}" class="top-menu"><span class="glyphicon glyphicon-home" style="padding: 5px;"></span>Home</a>
+                <div id="opcoes_tarefa" style="display:none">    
+                    <a onclick="verInfo()"><span class="glyphicon glyphicon-info-sign" style="padding: 10px;"></span>Descrição da tarefa</a>                       
+                    <form action="/action_page.php">
+                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                        <label for="vehicle1"> I have a bike</label><br>
+                        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                        <label for="vehicle2"> I have a car</label><br>
+                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                        <label for="vehicle3"> I have a boat</label><br><br>
+                        <input type="submit" value="Enviar">
+                    </form>
                 </div>
             </div>
+            <div id="menu_ocultar"  class="page-header">
+                <a onclick="mostrarMenu()"><span class="glyphicon glyphicon-chevron-down" style="padding: 5px;"></span>Mostrar</a>
+                <a href="{% url 'home' %}" class="top-menu"><span class="glyphicon glyphicon-home" style="padding: 5px;"></span>Home</a>
+            </div>     
             <div class="row">
                 <div class="col-md-8">
                     {% block content %}

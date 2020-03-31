@@ -1,0 +1,2 @@
+Para mostrar item apenas qnd marcador é localizado
+z-index: -2 

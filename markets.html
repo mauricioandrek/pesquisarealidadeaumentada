@@ -1,0 +1,15 @@
+	<a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3; '>
+        <a-marker preset="hiro">
+            <a-box position='0 0.5 0' material='color: yellow;'></a-box>
+        </a-marker>
+    <a-entity camera></a-entity>
+    </a-scene> 
+
+        <a-scene embedded arjs="sourceType: webcam;">
+        <a-marker preset="hiro" cursor='rayOrigin: mouse'>
+            <a-box position="0 0 0" scale='2 2 2' material="opacity: 0.5;" foo>
+            <a-animation begin="buttonpressed" dur="750" attribute="scale" to="2 4 4" direction="alternate"></a-animation>
+        </a-box>
+        </a-marker>
+        <a-camera-static/>
+        </a-scene>

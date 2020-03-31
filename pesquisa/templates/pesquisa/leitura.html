@@ -1,10 +1,8 @@
 {% extends 'pesquisa/base_leitura.html' %}
 
 {% block content %}
-    <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3; '>
-        <a-marker preset="hiro">
-            <a-box position='0 0.5 0' material='color: yellow;'></a-box>
-        </a-marker>
-    <a-entity camera></a-entity>
-    </a-scene> 
+    <iframe id="ar_iframe" height=80% width="100%" src="{% url 'ar' %}">
+    </iframe>
+    <!-- include the Glitch button to show what the webpage is about and
+        to make it easier for folks to view source and remix -->
 {% endblock %}
