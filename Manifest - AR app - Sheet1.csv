@@ -1,0 +1,17 @@
+step,type,value,desc
+0,info,Atividade XYZ,Descrição completa da atividade
+1,info,Passo 1,Enunciado geral do passo 1
+1,model,https://teste.com.br/modelo.obj,
+1,marker,https://teste.com.br/marker1.pngj,
+1,op,a,Opção 1
+1,op,b,Opção 2
+1,op,c,Opção 3
+2,info,Passo 2,Descrição do enunciado do passo 2
+2,model,https://teste.com.br/modelo2.obj,
+2,marker,https://teste.com.br/marker2.pngj,
+2,op,a,Opção 1
+2,op,b,Opção 2
+2,op,c,Opção 3
+2,op,d,Opção 4
+F,result,1-a:2-b,Informação de resultado com escolhas step1-A e step2-B
+F,result,1-a-b:2-a-b-c,Informação de resultado com escolhas step1-B e step2-A-B-C

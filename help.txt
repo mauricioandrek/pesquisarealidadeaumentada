@@ -1,2 +1,11 @@
 Para mostrar item apenas qnd marcador é localizado
 z-index: -2 
+
+
+talvez mostrar uma imagem
+<a-plane position='0 1.0 0' material='src:https://.com/playground/aframe/examples/img/coffee-01.png;'></a-plane>
+
+
+
+ler do google spreadshets com python
+https://towardsdatascience.com/accessing-google-spreadsheet-data-using-python-90a5bc214fd2

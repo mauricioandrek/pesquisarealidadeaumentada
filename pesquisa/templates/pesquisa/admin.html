@@ -4,4 +4,38 @@
 <h1>
     Pagina do Administrador
 </h1>
+    {% if messages %}
+        {% for message in messages %}
+            <div>
+                <strong>{{message|safe}}</strong>
+            </div>
+        {% endfor %}
+    {% else %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="myfile" />
+        <input type="submit" name="submit" value="Upload" />
+    </form>
+    {% endif %}
+
+    <table style="width: 100%">
+        <tbody>
+        <tr>
+        <th style="width: 5% text-align: left;">step</th>
+        <th style="width: 5% text-align: left;">typee</th>
+        <th style="width: 20% text-align: left;">value</th>
+        <th style="width: 40% text-align: left;">desc</th>
+        <th style="width: 30% text-align: left;">imported_date</th>
+        </tr>
+        {% for manifesto in manifestos %}
+        <tr>
+            <td style="width: 5%">{{manifesto.step}}&nbsp;</td>
+            <td style="width: 5%">{{manifesto.typee}}&nbsp;</td>
+            <td style="width: 20%">{{manifesto.value}}&nbsp;</td>
+            <td style="width: 40%">{{manifesto.desc}}&nbsp;</td>
+            <td style="width: 30%">{{manifesto.imported_date}}&nbsp;</td>
+        </tr>         
+        {% endfor %}  
+        </tbody>
+        </table> 
 {% endblock %}
