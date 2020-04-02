@@ -1,3 +1,10 @@
+<!--
+ Created on Tue Mar 31 2020
+
+ Copyright (c) 2020 Maurício André Kunz
+ mauricioandrek@hotmail.com
+-->
+
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -25,5 +32,15 @@
             </a-marker>
         <a-entity camera></a-entity>
         </a-scene> 
+    </body>
+    <body style='margin : 0px; overflow: hidden;'>
+        <a-scene embedded arjs>
+            {% for objeto in objetos_list %}
+            <a-marker type='barcode' value='{{objeto.id_marcador}}'>
+                <a-box position='0 0.5 0' material='color: {{objeto.descricao}};'></a-box>
+            </a-marker>
+            {% endfor %}
+            <a-entity camera></a-entity>
+        </a-scene>
     </body>
 </html>

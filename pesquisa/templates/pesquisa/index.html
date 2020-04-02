@@ -1,10 +1,29 @@
-{% extends 'pesquisa/base.html' %}
+<!--
+ Created on Tue Mar 31 2020
 
+ Copyright (c) 2020 Maurício André Kunz
+ mauricioandrek@hotmail.com
+-->
+
+{% extends 'pesquisa/base.html' %}
 {% block content %}
-    <h1>
-        Aplicação de AR para uso em aulas práticas de medicina
-    </h1>
-    <p>
-        O objetivo desse aplicativo é permitir que alunos utilizem realidade aumentada (AR) na sala de aula de uma forma ativa. Nesse caso, os próprios alunos podem produzir e organizar os conteúdos visualizados pelo aplicativo.
-    </p>
+    {% if state_zero %}
+        <h1>
+            {{ state_zero.name }}
+        </h1>
+        <p>
+            {{ state_zero.desc }}
+        </p>
+    {% else %}
+            <h1>
+                Aplicação de AR para uso em aulas práticas de medicina
+            </h1>
+            <p>
+                O objetivo desse aplicativo é permitir que alunos utilizem realidade aumentada (AR) na sala de aula de uma forma ativa. Nesse caso, os próprios alunos podem produzir e organizar os conteúdos visualizados pelo aplicativo.
+            </p>
+    {% endif %}
+    <form method = "post" action="{% url 'home' %}">
+        {% csrf_token %}
+        <input type="submit" value="Reiniciar Atividade">
+    </form>
 {% endblock %}

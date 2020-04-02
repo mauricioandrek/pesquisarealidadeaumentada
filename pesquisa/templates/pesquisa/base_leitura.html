@@ -1,3 +1,10 @@
+<!--
+ Created on Tue Mar 31 2020
+
+ Copyright (c) 2020 Maurício André Kunz
+ mauricioandrek@hotmail.com
+-->
+
 {% load static %}
 <html>
     <head>   
@@ -76,21 +83,21 @@
             <div id="info_tarefa">     
                 <a onclick="verOpcoes()"><span class="glyphicon glyphicon-tasks" style="padding: 10px;"></span>Opções</a>           
                 <h1>
-                    Passo 1
+                    {{ state_now.name }}
                 </h1>
                 <p>
-                    Enunciado geral do passo 1
+                    {{ state_now.desc }}
                 </p>
             </div>
             <div id="opcoes_tarefa" style="display:none">    
                 <a onclick="verInfo()"><span class="glyphicon glyphicon-info-sign"></span>Descrição da tarefa</a>                       
-                <form action="/action_page.php">
-                    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                    <label for="vehicle1"> I have a bike</label><br>
-                    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                    <label for="vehicle2"> I have a car</label><br>
-                    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                    <label for="vehicle3"> I have a boat</label><br><br>
+                <form method = "post" action="{% url 'leitura' %}">
+                    {% for opcao in state_now.options %}
+                        {% csrf_token %}
+                        <input type="checkbox" id="option{{ opcao.value }}" name="{{ opcao.value }}" value="{{ opcao.value }}">
+                        <label for="labelA"> {{ opcao.desc }} </label><br>
+                    {% endfor %}
+                    {% csrf_token %}
                     <input type="submit" value="Enviar">
                 </form>
             </div>

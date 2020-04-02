@@ -1,7 +1,12 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-
+#
+# Created on Tue Mar 31 2020
+#
+# Copyright (c) 2020 Maurício André Kunz
+# mauricioandrek@hotmail.com
+#
 
 class Manifest(models.Model):
     step = models.TextField()
@@ -23,3 +28,6 @@ class Manifest(models.Model):
         return self.value
     def getDesc(self):
         return self.desc
+
+
+    

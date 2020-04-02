@@ -1,3 +1,10 @@
+#
+# Created on Tue Mar 31 2020
+#
+# Copyright (c) 2020 Maurício André Kunz
+# mauricioandrek@hotmail.com
+#
+
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
