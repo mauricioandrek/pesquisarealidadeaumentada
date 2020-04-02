@@ -111,8 +111,7 @@ def index(request):
 
 	if(request.session.get('state_now')):
 		state_now = State.JsonToModel(request.session['state_now'])
-	logger.error("state_now inicial : {0}".format(state_now))
-
+		
 	return render(request, 'pesquisa/index.html', { 'state_zero': state_zero })
 
 def leitura(request):
