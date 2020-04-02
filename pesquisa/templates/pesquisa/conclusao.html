@@ -12,26 +12,36 @@
             <h1>Conclusão</h1>
         </div>
         <div class="row">
-            <p>Com base nas respostas:</p>
+            <div class="col-md-auto">
+                <p>Com base nas respostas:</p>
+            </div>
         </div>
         {% for result in results %}
         <div class="row">
-            <p><strong>{{ result }}</strong></p>
+            <div class="col-md-auto">
+                <p><strong>{{ result }}</strong></p>
+            </div>
         </div>
         {% endfor %}
         <div class="row">
-            <p> seguem as seguintes observações: </p>
+            <div class="col-md-auto">
+                <p> seguem as seguintes observações: </p>
+            </div>
         </div>
         {% for mensagem in mensagens %}
             <div class="row">
-                <p><strong>{{ mensagem }}</strong></p>
+                <div class="col-md-auto">
+                    <p><strong>{{ mensagem }}</strong></p>
+                </div>
             </div>
         {% endfor %}
         <div class="row">
-            <form method = "post" action="{% url 'home' %}">
-                {% csrf_token %}
-                <input type="submit" value="Reiniciar Atividade">
-            </form>
+            <div class="col-md-auto">
+                <form method = "post" id="formReiniciarAtividade" action="{% url 'home' %}">
+                    {% csrf_token %}
+                </form>
+                <a href="#" onclick="reiniciarAtividade()" class="button-page"><span class="fa fa-refresh" style="padding: 5px;"></span>Reiniciar Atividade</a>
+            </div>
         </div>
     </div>
 {% endblock %}

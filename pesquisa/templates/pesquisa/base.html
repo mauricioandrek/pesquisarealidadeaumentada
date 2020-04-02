@@ -64,7 +64,12 @@
             font-size: 20pt;
             margin-right: 20px;
         }
-
+        .button-page, .button-page:hover, .button-page:visited {
+            color: #C25100;
+            float: left;
+            font-size: 40px;
+            padding: 10px;
+        }
         .post {
             margin-bottom: 40px;
         }
@@ -73,12 +78,21 @@
             color: #000000;
         }
         </style>
+        <script>
+            function reiniciarAtividade(){
+                var form = document.getElementById("formReiniciarAtividade");
+                form.submit();
+            }
+            function verConclusao(){
+                var form = document.getElementById("formVerConclusao");
+                form.submit();
+            }
+        </script>
     </head>
     <body>
         <div class="page-header">
             <div>
                 <a href="{% url 'home' %}"><span class="fa fa-home" style="padding: 5px;"></span>Home</a>
-                <a href="{% url 'leitura' %}" class="top-menu"><span class="fa fa-qrcode" style="padding: 5px;"></span>Iniciar</a>
                 <a href="{% url 'administrador' %}" class="top-menu"><span class="fa fa-sliders" style="padding: 5px;"></span>Admin</a>
             </div>
         </div>

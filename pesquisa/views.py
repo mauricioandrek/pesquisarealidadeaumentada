@@ -166,7 +166,6 @@ def leitura(request):
 				return redirect('conclusao')
 			else:
 				state_now = states[index + 1]
-				logger.error("Atualizando state_now : {0}".format(state_now))
 				request.session['state_now'] = Utils.ObjectToJson(state_now)
 
 			return HttpResponseRedirect('leitura')

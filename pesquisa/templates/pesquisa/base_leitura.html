@@ -96,7 +96,14 @@
                     firstCheckbox.setCustomValidity('');  
                     form.submit();
                 }
-                
+            }
+            function reiniciarAtividade(){
+                var form = document.getElementById("formReiniciarAtividade");
+                form.submit();
+            }
+            function verConclusao(){
+                var form = document.getElementById("formVerConclusao");
+                form.submit();
             }
         </script>
     </head>
@@ -130,16 +137,16 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-auto">
-                                        <form method = "post" action="{% url 'home' %}">
+                                        <form method = "post" id="formReiniciarAtividade" action="{% url 'home' %}">
                                             {% csrf_token %}
-                                            <input type="submit" value="Reiniciar Atividade">
                                         </form>
+                                        <a href="#" onclick="reiniciarAtividade()" class="button-page"><span class="fa fa-refresh" style="padding: 5px;"></span>Reiniciar Atividade</a>
                                     </div>
                                     <div class="col-md-auto">
-                                        <form method = "post" action="{% url 'conclusao' %}">
+                                        <form method = "post" id="formVerConclusao" action="{% url 'conclusao' %}">
                                             {% csrf_token %}
-                                            <input type="submit" value="Ver conclusão">
                                         </form>
+                                        <a href="#" onclick="verConclusao()" class="button-page"><span class="fa fa-book" style="padding: 5px;"></span>Ver conclusão</a>
                                     </div>
                                 </div>
                             {% else %}

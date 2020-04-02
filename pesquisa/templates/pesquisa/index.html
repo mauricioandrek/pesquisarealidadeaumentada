@@ -7,47 +7,61 @@
 
 {% extends 'pesquisa/base.html' %}
 {% block content %}
-    {% if state_zero %}
-        <div class="content container">
+    <div class="content container">
+    {% if state_zero %} 
             <div class="row">
                 <h1>
                     {{ state_zero.name }}
                 </h1>
             </div>
             <div class="row">
-                <p>
-                    {{ state_zero.desc }}
-                </p>
+                <div class="col-md-auto">
+                    <p>
+                        {{ state_zero.desc }}
+                    </p>
+                </div>
             </div>
-        </div>         
+            <div class="row">
+                <div class="col-md-auto">                
+                    <a href="{% url 'leitura' %}" class="button-page"><span class="fa fa-qrcode" style="padding: 5px;"></span>Iniciar</a>    
+                </div>  
+            </div>        
     {% else %}
-        <div class="content container">
             <div class="row">
                 <h1>
                     Aplicação de AR para uso em aulas práticas de medicina
                 </h1>
             </div>
             <div class="row">
-                <p>
-                    O objetivo desse aplicativo é permitir que alunos utilizem realidade aumentada (AR) na sala de aula de uma forma ativa. Nesse caso, os próprios alunos podem produzir e organizar os conteúdos visualizados pelo aplicativo.
-                </p>
+                <div class="col-md-auto">
+                    <p>
+                        O objetivo desse aplicativo é permitir que alunos utilizem realidade aumentada (AR) na sala de aula de uma forma ativa. Nesse caso, os próprios alunos podem produzir e organizar os conteúdos visualizados pelo aplicativo.
+                    </p>
+                </div>
             </div>
-        </div>          
+            <div class="row">
+                <div class="col-md-auto">
+                    <a href="{% url 'leitura' %}" class="button-page"><span class="fa fa-qrcode" style="padding: 5px;"></span>Iniciar</a>    
+                </div>
+            </div>       
     {% endif %}
-    <div class="content container">
         <div class="row">
-            <div class="col-md-8">
-                <form method = "post" action="{% url 'home' %}">
+            <div class="col-md-auto">
+                <form method = "post" id="formReiniciarAtividade" action="{% url 'home' %}">
                     {% csrf_token %}
-                    <input type="submit" value="Reiniciar Atividade">
                 </form>
-                {% if concluido %}
-                    <form method = "post" action="{% url 'conclusao' %}">
-                        {% csrf_token %}
-                        <input type="submit" value="Ver conclusão">
-                    </form>
-                {% endif %}
+                <a href="#" onclick="reiniciarAtividade()" class="button-page"><span class="fa fa-refresh" style="padding: 5px;"></span>Reiniciar Atividade</a>
             </div>
         </div>
-    </div>
+        {% if concluido %}
+            <div class="row">
+                <div class="col-md-auto">
+                    <form method = "post" id="formVerConclusao" action="{% url 'conclusao' %}">
+                        {% csrf_token %}
+                    </form>
+                    <a href="#" onclick="verConclusao()" class="button-page"><span class="fa fa-book" style="padding: 5px;"></span>Ver conclusão</a>
+                </div>
+            </div>
+        {% endif %}
+</div>
 {% endblock %}
