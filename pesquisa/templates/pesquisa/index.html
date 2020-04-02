@@ -8,28 +8,46 @@
 {% extends 'pesquisa/base.html' %}
 {% block content %}
     {% if state_zero %}
-        <h1>
-            {{ state_zero.name }}
-        </h1>
-        <p>
-            {{ state_zero.desc }}
-        </p>
+        <div class="content container">
+            <div class="row">
+                <h1>
+                    {{ state_zero.name }}
+                </h1>
+            </div>
+            <div class="row">
+                <p>
+                    {{ state_zero.desc }}
+                </p>
+            </div>
+        </div>         
     {% else %}
-            <h1>
-                Aplicação de AR para uso em aulas práticas de medicina
-            </h1>
-            <p>
-                O objetivo desse aplicativo é permitir que alunos utilizem realidade aumentada (AR) na sala de aula de uma forma ativa. Nesse caso, os próprios alunos podem produzir e organizar os conteúdos visualizados pelo aplicativo.
-            </p>
+        <div class="content container">
+            <div class="row">
+                <h1>
+                    Aplicação de AR para uso em aulas práticas de medicina
+                </h1>
+            </div>
+            <div class="row">
+                <p>
+                    O objetivo desse aplicativo é permitir que alunos utilizem realidade aumentada (AR) na sala de aula de uma forma ativa. Nesse caso, os próprios alunos podem produzir e organizar os conteúdos visualizados pelo aplicativo.
+                </p>
+            </div>
+        </div>          
     {% endif %}
-    <form method = "post" action="{% url 'home' %}">
-        {% csrf_token %}
-        <input type="submit" value="Reiniciar Atividade">
-    </form>
-    {% if concluido %}
-        <form method = "post" action="{% url 'conclusao' %}">
-            {% csrf_token %}
-            <input type="submit" value="Ver conclusão">
-        </form>
-    {% endif %}
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                <form method = "post" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Reiniciar Atividade">
+                </form>
+                {% if concluido %}
+                    <form method = "post" action="{% url 'conclusao' %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Ver conclusão">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

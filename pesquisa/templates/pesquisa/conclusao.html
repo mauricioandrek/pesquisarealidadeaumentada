@@ -7,17 +7,31 @@
 {% extends 'pesquisa/base.html' %}
 
 {% block content %}
-    <h1>Conclusão</h1>
-    <p>Com base nas respostas:</p>
-    {% for result in results %}
-        <p><strong>{{ result }}</strong></p>
-    {% endfor %}
-    <p> seguem as seguintes observações: </p>
-    {% for mensagem in mensagens %}
-        <p><strong>{{ mensagem }}</strong></p>
-    {% endfor %}
-    <form method = "post" action="{% url 'home' %}">
-        {% csrf_token %}
-        <input type="submit" value="Reiniciar Atividade">
-    </form>
+    <div class="content container">
+        <div class="row">
+            <h1>Conclusão</h1>
+        </div>
+        <div class="row">
+            <p>Com base nas respostas:</p>
+        </div>
+        {% for result in results %}
+        <div class="row">
+            <p><strong>{{ result }}</strong></p>
+        </div>
+        {% endfor %}
+        <div class="row">
+            <p> seguem as seguintes observações: </p>
+        </div>
+        {% for mensagem in mensagens %}
+            <div class="row">
+                <p><strong>{{ mensagem }}</strong></p>
+            </div>
+        {% endfor %}
+        <div class="row">
+            <form method = "post" action="{% url 'home' %}">
+                {% csrf_token %}
+                <input type="submit" value="Reiniciar Atividade">
+            </form>
+        </div>
+    </div>
 {% endblock %}

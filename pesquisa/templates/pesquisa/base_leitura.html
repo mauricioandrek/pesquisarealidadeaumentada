@@ -9,17 +9,14 @@
 <html>
     <head>   
         <title>AR app</title>
-        <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     
-        <!-- FontAwesome Icons -->
+         <!-- FontAwesome Icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <style>
         .page-header {
             background-color: #C25100;
@@ -63,6 +60,10 @@
             font-size: 30pt;
             margin-right: 20px;
         }
+        .nav-pills .pill-1 .nav-link.active {
+            color:#C25100;
+            background-color: #ffffff;
+        }
         </style>
         <script>
             function mostrarMenu() {
@@ -72,14 +73,6 @@
             function ocultarMenu() {
                 document.getElementById("menu_mostrar").style.display = 'none';
                 document.getElementById("menu_ocultar").style.display = 'block';               
-            }
-            function verInfo() {
-                document.getElementById("info_tarefa").style.display = 'block';
-                document.getElementById("opcoes_tarefa").style.display = 'none';               
-            }
-            function verOpcoes() {
-                document.getElementById("info_tarefa").style.display = 'none';
-                document.getElementById("opcoes_tarefa").style.display = 'block';                 
             }
             function isChecked(checkboxes) {            
                 var checkboxLength = checkboxes.length;
@@ -109,43 +102,69 @@
     </head>
     <body>
         <div id="menu_mostrar" class="page-header" style="display:none">
-            <a class="text-white" onclick="ocultarMenu()"><span class="glyphicon glyphicon-chevron-up"></span> Ocultar</a>
-            <a href="{% url 'home' %}" class="top-menu text-white"><span class="glyphicon glyphicon-home" style="padding: 5px;"></span> Home</a>
-            
-            <div id="info_tarefa">     
-                <a class="text-white" onclick="verOpcoes()"><span class="glyphicon glyphicon-tasks" style="padding: 10px;"></span> Opções</a>           
-                <h1>
-                    {{ state_now.name }}
-                </h1>
-                <p class="text-white"> 
-                    {{ state_now.desc }}
-                </p>
-            </div>
-            <div id="opcoes_tarefa" style="display:none">    
-                <a class="text-white" onclick="verInfo()"><span class="glyphicon glyphicon-info-sign" style="padding: 10px;"></span> Descrição da tarefa</a>                       
-                <div class="content container">
-                    <div class="row">
-                        <form method = "post" id="sectionForm" action="{% url 'leitura' %}">
-                            {% for opcao in state_now.options %}
-                                {% csrf_token %}
-                                <input type="checkbox" id="option{{ opcao.value }}" name="{{ opcao.value }}" value="{{ opcao.value }}">
-                                <label class="text-white" for="label{{ opcao.value }}"> {{ opcao.desc }} </label><br>
-                            {% endfor %}
-                        </form>
+            <a class="text-white" onclick="ocultarMenu()"><span class="fa fa-level-up"></span> Ocultar</a>
+            <a href="{% url 'home' %}" class="top-menu text-white"><i class="fa fa-home" style="padding: 5px;"></i> Home</a>
+            <div class="container">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item pill-1">
+                        <a class="nav-link active" id="pills-info-tab" data-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info" aria-selected="true">Informações</a>
+                    </li>
+                    <li class="nav-item pill-1">
+                        <a class="nav-link"  id="pills-options-tab" data-toggle="pill" href="#pills-options" role="tab" aria-controls="pills-options" aria-selected="false">Opções</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">     
+                        <h1>
+                            {{ state_now.name }}
+                        </h1>
+                        <p class="text-white"> 
+                            {{ state_now.desc }}
+                        </p>
                     </div>
-                    <div class="row">
-                        {% if concluido %}
-                            <a class="text-white" onclick="checkValidity()" disabled="disabled">Enviar <span class="glyphicon glyphicon-arrow-right"></span></a>
-                        {% else %}
-                            <a class="text-white" onclick="checkValidity()">Enviar <span class="glyphicon glyphicon-arrow-right"></span></a>
-                        {% endif %}
+                    <div class="tab-pane fade" id="pills-options" role="tabpanel" aria-labelledby="pills-options-tab">
+                        <div class="content container">
+                            {% if concluido %}
+                                <div class="row">
+                                    <p class="text-white"> Atividade encerrada. </p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-auto">
+                                        <form method = "post" action="{% url 'home' %}">
+                                            {% csrf_token %}
+                                            <input type="submit" value="Reiniciar Atividade">
+                                        </form>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <form method = "post" action="{% url 'conclusao' %}">
+                                            {% csrf_token %}
+                                            <input type="submit" value="Ver conclusão">
+                                        </form>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="row">
+                                    <form method = "post" id="sectionForm" action="{% url 'leitura' %}">
+                                        {% for opcao in state_now.options %}
+                                            {% csrf_token %}
+                                            <input type="checkbox" id="option{{ opcao.value }}" name="{{ opcao.value }}" value="{{ opcao.value }}">
+                                            <label class="text-white" for="label{{ opcao.value }}"> {{ opcao.desc }} </label><br>
+                                        {% endfor %}
+                                    </form>
+                                </div>
+                                <div class="row">
+                                    <a class="text-white" onclick="checkValidity()">Enviar <span class="fa fa-check"></span></a>
+                                </div>
+                            {% endif %}
+                            
+                        </div>
                     </div>
-                </div>
+                </div>   
             </div>
         </div>
         <div id="menu_ocultar"  class="page-header">
-            <a class="text-white" onclick="mostrarMenu()"><span class="glyphicon glyphicon-chevron-down" style="padding: 5px;"></span> Mostrar</a>
-            <a href="{% url 'home' %}" class="top-menu text-white"><span class="glyphicon glyphicon-home" style="padding: 5px;"></span> Home</a>
+            <a class="text-white" onclick="mostrarMenu()"><span class="fa fa-level-down" style="padding: 5px;"></span> Mostrar</a>
+            <a href="{% url 'home' %}" class="top-menu text-white"><span class="fa fa-home" style="padding: 5px;"></span> Home</a>
         </div>     
         {% block content %}
         {% endblock %}

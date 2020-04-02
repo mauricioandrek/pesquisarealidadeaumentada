@@ -2,13 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 import json
 from django.core.files.storage import FileSystemStorage, default_storage
 from django.db.models import Count
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django import template
 from .models import Manifest
 from .utils import Utils
 from .other_models import State, Option
 import csv, io
 from django.utils import timezone
+from django.contrib import messages
 import uuid
 import logging
 #
@@ -110,6 +112,8 @@ def index(request):
 				del request.session['state_now']
 		if request.session.get('concluido'):
 			del request.session['concluido']
+			
+		return HttpResponseRedirect('/')
 
 	if(request.session.get('state_now')):
 		state_now = State.JsonToModel(request.session['state_now'])
@@ -164,6 +168,8 @@ def leitura(request):
 				state_now = states[index + 1]
 				logger.error("Atualizando state_now : {0}".format(state_now))
 				request.session['state_now'] = Utils.ObjectToJson(state_now)
+
+			return HttpResponseRedirect('leitura')
 	concluido = False
 	if(request.session.get('concluido')):
 		if request.session['concluido']:
@@ -193,17 +199,21 @@ def conclusao(request):
 def administrador(request):
 	global logger
 	dados = Manifest.objects.all()
-	logger.error("dados : {0}".format(dados))  
 	template = 'pesquisa/admin.html'
 	if request.method == "GET":
 		return render(request, template, { 'manifestos': dados })
 
-   
 	#region IMPORTAÇÃO DO MANIFESTO ATRAVÉS DE UM ARQUIVO CSV. 
-	csv_file = request.FILES['myfile']
+	csv_file = None
+	if(request.FILES.get('myfile')):
+		csv_file = request.FILES['myfile']
     # checar se é um CSV
+	if csv_file == None:
+		messages.error(request, 'Não foi selecionado nenhum arquivo')
+		return HttpResponseRedirect('administrador')
 	if not csv_file.name.endswith('.csv'):
 		messages.error(request, 'Não foi selecionado um arquivo CSV')
+		return HttpResponseRedirect('administrador')
 	
 	data_set = csv_file.read().decode('UTF-8')
 	io_string = io.StringIO(data_set)
@@ -219,4 +229,4 @@ def administrador(request):
 			)
 	dados = Manifest.objects.all()
 	#endregion IMPORTAÇÃO DO MANIFESTO ATRAVÉS DE UM ARQUIVO CSV.
-	return render(request, template, {'manifestos' : dados })
+	return HttpResponseRedirect('administrador')
