@@ -108,11 +108,17 @@ def index(request):
 		else:
 			if request.session.get('state_now'):
 				del request.session['state_now']
+		if request.session.get('concluido'):
+			del request.session['concluido']
 
 	if(request.session.get('state_now')):
 		state_now = State.JsonToModel(request.session['state_now'])
-		
-	return render(request, 'pesquisa/index.html', { 'state_zero': state_zero })
+	concluido = False
+	if(request.session.get('concluido')):
+		if request.session['concluido']:
+			concluido = True
+
+	return render(request, 'pesquisa/index.html', { 'state_zero': state_zero, 'concluido' : concluido })
 
 def leitura(request):
 	states = None
@@ -137,13 +143,12 @@ def leitura(request):
 				request.session['state_now'] = Utils.ObjectToJson(state_now)
 	elif request.method == "POST":
 		if(len(states) > 0):	
-			resultState = ''
+			resultState = state_now.step
 			for option in state_now.options:
 				isChecked = request.POST.get(option['value'], False)
 				if isChecked:
-					resultState += option['step'] + '-' + option['value'] + ':'
+					resultState +=  '-' + option['value']
 			if resultState != '':
-				resultState = resultState[:-1]
 				results.append(resultState)
 			request.session['results'] = Utils.ObjectToJson(results)
 
@@ -154,19 +159,37 @@ def leitura(request):
 				index = -1
 			# testa se é o ultimo state
 			if index == (len(states)-1):
-				logger.error(" ------------ FIIIIIIIIIM ----------------------")
-				logger.error("results : {0}".format(results))
-				logger.error("states_final : {0}".format(states_final))
-				logger.error(" ------------ FIIIIIIIIIM ----------------------")
+				return redirect('conclusao')
 			else:
 				state_now = states[index + 1]
 				logger.error("Atualizando state_now : {0}".format(state_now))
 				request.session['state_now'] = Utils.ObjectToJson(state_now)
-			
+	concluido = False
+	if(request.session.get('concluido')):
+		if request.session['concluido']:
+			concluido = True		
 				
 
-	return render(request, 'pesquisa/leitura.html', { 'states': states, 'states_final' : states_final, 'state_now' : state_now })
-
+	return render(request, 'pesquisa/leitura.html', { 'states': states, 'states_final' : states_final, 'state_now' : state_now, 'concluido' : concluido })
+def conclusao(request):
+	results = []
+	states_final = []
+	if(request.session.get('states_final')):
+		states_final = State.JsonToModelArray(request.session['states_final'])
+	if(request.session.get('results')):
+		results = json.loads(request.session['results'])
+	resultAtual = ':'.join(results)
+	resultAtual = resultAtual.replace('"', '')
+	logger.error("resultAtual : {0}".format(resultAtual))  
+	mensagens = []
+	for state in states_final:
+		logger.error("state : {0}".format(state))  
+		if(state.name == resultAtual):
+			mensagens.append(state.desc)
+	if(len(mensagens) == 0):
+		mensagens.append('Nenhuma observação')
+	request.session['concluido'] = True
+	return render(request, 'pesquisa/conclusao.html', { 'mensagens' : mensagens, 'results' : results })
 def administrador(request):
 	global logger
 	dados = Manifest.objects.all()

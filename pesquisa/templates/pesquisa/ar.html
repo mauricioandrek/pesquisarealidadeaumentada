@@ -24,23 +24,16 @@
         })
         </script>
     </head>
-    <body style="margin : 0px;">
-
+    <body style='margin : 0px; overflow: hidden;'>
         <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3; '>
             <a-marker preset="hiro">
                 <a-box position='0 0.5 0' material='color: yellow;'></a-box>
             </a-marker>
-        <a-entity camera></a-entity>
-        </a-scene> 
-    </body>
-    <body style='margin : 0px; overflow: hidden;'>
-        <a-scene embedded arjs>
-            {% for objeto in objetos_list %}
-            <a-marker type='barcode' value='{{objeto.id_marcador}}'>
-                <a-box position='0 0.5 0' material='color: {{objeto.descricao}};'></a-box>
+            <a-marker type='barcode' value="{{state_now.marker}}" registerevents>
+                <a-entity scale="0.05 0.05 0.05" obj-model="obj: url({{state_now.model}}); mtl: url({{state_now.model}})">
+                </a-entity>
             </a-marker>
-            {% endfor %}
-            <a-entity camera></a-entity>
+          <a-entity camera></a-entity>
         </a-scene>
     </body>
 </html>

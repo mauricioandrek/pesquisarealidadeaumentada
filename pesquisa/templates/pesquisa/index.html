@@ -26,4 +26,10 @@
         {% csrf_token %}
         <input type="submit" value="Reiniciar Atividade">
     </form>
+    {% if concluido %}
+        <form method = "post" action="{% url 'conclusao' %}">
+            {% csrf_token %}
+            <input type="submit" value="Ver conclusão">
+        </form>
+    {% endif %}
 {% endblock %}
