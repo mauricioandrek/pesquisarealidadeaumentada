@@ -140,11 +140,12 @@ def leitura(request):
 		results = json.loads(request.session['results'])
 
 	if request.method == "GET":
-		if(len(states) > 0):
-			if(state_now == None or state_now.step == ''):
-				logger.error("Definindo state_now inicial : {0}".format(states[0]))
-				state_now = states[0]
-				request.session['state_now'] = Utils.ObjectToJson(state_now)
+		if states != None:
+			if(len(states) > 0):
+				if(state_now == None or state_now.step == ''):
+					logger.error("Definindo state_now inicial : {0}".format(states[0]))
+					state_now = states[0]
+					request.session['state_now'] = Utils.ObjectToJson(state_now)
 	elif request.method == "POST":
 		if(len(states) > 0):	
 			resultState = state_now.step
