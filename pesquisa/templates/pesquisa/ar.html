@@ -64,7 +64,8 @@
           <!-- we use cors proxy to avoid cross-origin problems -->
           <a-nft
             type="nft"
-            url="pesquisa/static/pesquisa/trex"
+            {% load static %}
+            url="{% static "" %}pesquisa/trex"
             smooth="true"
             smoothCount="10"
             smoothTolerance=".01"
